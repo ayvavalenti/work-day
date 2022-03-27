@@ -1,2 +1,3 @@
-$("#task-form-modal .saveBtn").click(function() {
+$("#task-form .saveBtn").click(function() {
+    var text = $("")
 });
