@@ -1,50 +1,63 @@
-//all variables being used
-
-var past;
-var present;
-var future;
-var timeT;
-var dateT;
-var input;
-var timeM;
-
 //doing the day
 
-function displayDate (){
-    console.log(displayDate);
-    document.getElementById("currentDay").innerHTML = 
-    Date (); 
+var today = new Date();
+
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+$("#currentDay").html(date);
+
+//saving stuff
+
+$(document).ready(function () {
+    $(".saveBtn").on("click", function () {
+        var text = $(this).siblings(".description").val();
+        var timeS = $(this).parent().attr("id");
+        
+        localStorage.setItem(timeS, text);
+    })
+
+//time now
+
+function checkHour() {
+    var currentTime = moment().hour();
+
+    $(".time-block").each(function () {
+        var block = parseInt($(this).attr("id").split("hour")[1]);
+
+//did the time pass or is it still coming
+
+if(block < currentTime){
+    $(this).removeClass("future");
+    $(this).removeClass("present");
+    $(this).addClass("past");
+
 }
-dateT.setFullYear();
-dateT.setMonth();
-dateT.setDate();
-dateT.setDay();
 
-dateT = new Date();
+else if(block === currentTime){
+    $(this).removeClass("future");
+    $(this).addClass("present");
+    $(this).removeClass("past");
 
-dateT;
-
-function saveBtn (){
-    document.getElementsByClassName("saveBtn").innerHTML =
-    localStorage ();
-}
-
-// doing the hours
-function displayTime () {
- timeT = Date.now().getHours();
-}
-
-if (hour) {
-
-    if (timeT === timeM){
-
-    }
 
 }
+else {
+    $(this).addClass("future");
+    $(this).removeClass("present");
+    $(this).removeClass("past");
 
-function setColor(element, color) {
-    element.style.backgroundColor = color;
-}
-$("#task-form .saveBtn").click(function() {
-    var text = $("")
-});
+}})}
+
+//local storage
+
+$("#9 .description").val(localStorage.getItem("9"));
+$("#10 .description").val(localStorage.getItem("10"));
+$("#11 .description").val(localStorage.getItem("11"));
+$("#12 .description").val(localStorage.getItem("12"));
+$("#1 .description").val(localStorage.getItem("1"));
+$("#2 .description").val(localStorage.getItem("2"));
+$("#3 .description").val(localStorage.getItem("3"));
+$("#4 .description").val(localStorage.getItem("4"));
+$("#5 .description").val(localStorage.getItem("5"));
+
+checkHour();
+})
